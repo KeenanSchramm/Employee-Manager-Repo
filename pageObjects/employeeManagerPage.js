@@ -48,22 +48,29 @@ var employeeManagerCommands = {
     },
     addEmployee: function (addEmployee) {
         this
-            
-        .click('@addButton')
-        .click('@newEmployee')
-        .editEmployee({name: addEmployee.name, phone: addEmployee.phone, email: addEmployee.email, title: addEmployee.title})
-        .pause(1000)
-        .click('@saveButton')
-        .pause(1000)
-        .click('@employee2')
+            .isVisible("@newEmployee", result => {
+                if (result.value.error) {
+                    this
+                        .click("@addButton")
+                        .waitForElementVisible("@newEmployee")
+                }
+            })
+            .click('@newEmployee')
+            .editEmployee({ name: addEmployee.name, phone: addEmployee.phone, email: addEmployee.email, title: addEmployee.title })
+            .pause(1000)
+            .click('@saveButton')
+            .pause(1000)
+            .click('@employee2')
         return this
 
     },
-    removeEmployee: function (removeEmployee){
+    removeEmployee: function (removeEmployee) {
         this
-        .clickEmployee(removeEmployee.name)
-        .click('@deleteButton')
-        .pause(1000)
+            .clickEmployee(removeEmployee.name)
+            .click('@deleteButton')
+            .pause(1000)
+            .api.acceptAlert()
+            .pause(2000)
         return this
     }
 
@@ -99,7 +106,7 @@ module.exports = {
             selector: '//ul[@class="listContainer"]',
             locateStrategy: 'xpath'
         },
-        
+
     },
 
     var: lilianaVess = {

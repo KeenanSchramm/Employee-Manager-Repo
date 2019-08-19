@@ -25,9 +25,6 @@ module.exports = {
     'Remove the new employee': browser => {
         manager
         .removeEmployee(princessMidna)
-        .pause(1000)
-        .api.acceptAlert()
-        .pause(5000)
         .useXpath()
         .expect.element('//li[text()="Mr.Dontchange Ordelete"]').to.be.present;
         manager
