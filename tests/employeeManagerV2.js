@@ -7,16 +7,16 @@ module.exports = {
     after: browser => {
         browser.end()
     },
-    // 'edit employee': browser => {
-    //     manager
-    //     .editTest('Link', {name: lilianaVess.name, phone: lilianaVess.phone, email: lilianaVess.email ,title: lilianaVess.title}, 'Mr.Dontchange Ordelete')
-    //     .verify.containsText('@employeeID', '80118451' )
-    // },
-    // 'return previous employee': browser => {
-    //     manager
-    //     .editTest('Liliana Vess', {name: 'Link', phone: '8012570008', email:'masterSword@templeoftime.com' ,title: 'Hero of Time'}, 'Mr.Dontchange Ordelete')
-    //     .verify.containsText('@employeeID', '80118451' )
-    // },
+    'edit employee': browser => {
+        manager
+        .editTest('Link', {name: lilianaVess.name, phone: lilianaVess.phone, email: lilianaVess.email ,title: lilianaVess.title}, 'Mr.Dontchange Ordelete')
+        .verify.containsText('@employeeID', '80118451' )
+    },
+    'return previous employee': browser => {
+        manager
+        .editTest('Liliana Vess', {name: 'Link', phone: '8012570008', email:'masterSword@templeoftime.com' ,title: 'Hero of Time'}, 'Mr.Dontchange Ordelete')
+        .verify.containsText('@employeeID', '80118451' )
+    },
     'Add an employee': browser => {
         manager
         .addEmployee(princessMidna)
