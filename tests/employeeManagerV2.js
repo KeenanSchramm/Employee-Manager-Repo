@@ -1,4 +1,3 @@
-// let editTest = require('../testAssets/testEdit')
 let manager = {}
 module.exports = {
     beforeEach: browser => {
@@ -8,15 +7,32 @@ module.exports = {
     after: browser => {
         browser.end()
     },
-    'edit employee': browser => {
+    // 'edit employee': browser => {
+    //     manager
+    //     .editTest('Link', {name: lilianaVess.name, phone: lilianaVess.phone, email: lilianaVess.email ,title: lilianaVess.title}, 'Mr.Dontchange Ordelete')
+    //     .verify.containsText('@employeeID', '80118451' )
+    // },
+    // 'return previous employee': browser => {
+    //     manager
+    //     .editTest('Liliana Vess', {name: 'Link', phone: '8012570008', email:'masterSword@templeoftime.com' ,title: 'Hero of Time'}, 'Mr.Dontchange Ordelete')
+    //     .verify.containsText('@employeeID', '80118451' )
+    // },
+    'Add an employee': browser => {
         manager
-        .editTest('Link', {name: 'Liliana Vess', phone: '1258749630', email:'zombies@graveyard.com' ,title: 'Necromancer'}, 'AJ')
-        .verify.containsText('@employeeID', '80118451' )
+        .addEmployee(princessMidna)
+        .verify.containsText('@allEmployees', 'Princess Midna')
     },
-    'return previous employee': browser => {
+    'Remove the new employee': browser => {
         manager
-        .editTest('Liliana Vess', {name: 'Link', phone: '8012570008', email:'masterSword@templeoftime.com' ,title: 'Hero of Time'}, 'AJ')
-        .verify.containsText('@employeeID', '80118451' )
+        .removeEmployee(princessMidna)
+        .pause(1000)
+        .api.acceptAlert()
+        .pause(5000)
+        .useXpath()
+        .expect.element('//li[text()="Mr.Dontchange Ordelete"]').to.be.present;
+        manager
+        .useXpath()
+        .expect.element('//li[text()="Princess Midna"]').to.not.be.present;
     }
 
 }

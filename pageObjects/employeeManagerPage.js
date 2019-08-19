@@ -46,9 +46,28 @@ var employeeManagerCommands = {
 
         return this
     },
+    addEmployee: function (addEmployee) {
+        this
+            
+        .click('@addButton')
+        .click('@newEmployee')
+        .editEmployee({name: addEmployee.name, phone: addEmployee.phone, email: addEmployee.email, title: addEmployee.title})
+        .pause(1000)
+        .click('@saveButton')
+        .pause(1000)
+        .click('@employee2')
+        return this
+
+    },
+    removeEmployee: function (removeEmployee){
+        this
+        .clickEmployee(removeEmployee.name)
+        .click('@deleteButton')
+        .pause(1000)
+        return this
+    }
+
 }
-
-
 module.exports = {
     url: 'https://devmountain-qa.github.io/employee-manager-v2/build/index.html',
     commands: [employeeManagerCommands],
@@ -62,18 +81,38 @@ module.exports = {
             selector: '//span[@name="employeeID"]',
             locateStrategy: 'xpath'
         },
+        employee2: {
+            selector: '//li[@name="employee2"]',
+            locateStrategy: 'xpath'
+        },
         cardTitle: '#employeeTitle',
         nameField: 'input[name="nameEntry"]',
         phoneField: 'input[name="phoneEntry"]',
         titleField: 'input[name="titleEntry"]',
         emailField: 'input[name="emailEntry"]',
-        saveButton: '#saveBtn'
+        saveButton: '#saveBtn',
+        deleteButton: {
+            selector: '//button[@name="delete"]',
+            locateStrategy: 'xpath'
+        },
+        allEmployees: {
+            selector: '//ul[@class="listContainer"]',
+            locateStrategy: 'xpath'
+        },
+        
     },
-    
-    // var: lilianaVess = {
-    //     name: "Liliana Vess",
-    //     phone: "1258749630",
-    //     title: "Necromancer"
-    // },
+
+    var: lilianaVess = {
+        name: "Liliana Vess",
+        phone: "1258749630",
+        email: "zombies@graveyard.com",
+        title: "Necromancer"
+    },
+    var: princessMidna = {
+        name: "Princess Midna",
+        phone: "1258547896",
+        email: "mirrormirror@twilightrealm.com",
+        title: "Princess of Twilight"
+    },
 
 }
